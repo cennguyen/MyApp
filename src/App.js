@@ -4,6 +4,8 @@ import Search from './components/Search';
 import Sort from './components/Sort';
 import Form from './components/Form';
 import ListItem from './components/ListItem';
+import Items from './mockdata/Items';
+import Item from './components/Item';
 
 class App extends Component {
     render() {
@@ -25,10 +27,28 @@ class App extends Component {
                     <div className="col-md-offset-7 col-md-5">
                         <Form />
                     </div>
+
                 </div>
                 <ListItem/>
             </div>
         );
+    }
+    constructor(props) {    
+        super(props);
+        this.state = {
+            items: Items
+        }
+    }
+    renderItem = () => {
+        let {items} = this.state;
+        return items.map((item, index) => {
+            return (
+                <Item
+                    item={item}
+                    index={index}
+                  />
+            )
+        });
     }
 }
 
