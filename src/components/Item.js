@@ -9,7 +9,7 @@ class Item extends Component{
                 <td className="text-center"><span className="label label-danger">High</span></td>
                 <td>
                     <button type="button" className="btn btn-warning btn-sm">Edit</button>
-                    <button type="button" className="btn btn-danger btn-sm">Delete</button>
+                  <button type="button" className="btn btn-danger btn-sm">Deleted</button>
                 </td> 
             </tr>
         )
