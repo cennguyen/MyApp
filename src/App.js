@@ -6,6 +6,10 @@ import Form from './components/Form';
 import ListItem from './components/ListItem';
 import Items from './mockdata/Items';
 import Item from './components/Item';
+import SweetAlert from 'sweetalert';
+import swal from 'sweetalert';
+
+
 class App extends Component {
     render() {
         return (
@@ -49,9 +53,13 @@ class App extends Component {
     constructor(props) {    
         super(props);
         this.state = {
-            items: Items
+            items: Items,
+            showAlert: false,
+            titleAlert: ''
         }
     }
+ 
+    
     renderItem = () => {
         let {items} = this.state;
         return items.map((item, index) => {
