@@ -29,7 +29,6 @@ class App extends Component {
                 </div>
                 <div className="panel panel-success">
                 <div className="panel-heading">List Item</div>
-           
                 <table className="table table-hover">
                     <thead>
                         <tr>
