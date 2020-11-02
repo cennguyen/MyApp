@@ -29,7 +29,6 @@ class App extends  React.Component {
     let classNameLabel = '';
         return (
             <div className="container">
-          <button onClick={()=>this.setState({ showAlert: true })}>Alert</button>
             <SweetAlert
                  show={this.state.showAlert}
                  title="Delete Item"
