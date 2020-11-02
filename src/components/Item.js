@@ -2,7 +2,16 @@ import React, {Component} from 'react';
 
 class Item extends Component{
     render() {
-       let {item, index} = this.props;
+        let {item,index} = this.props;
+        if(item === 0) {
+            return (
+                <tr>
+                    <td colSpan="4" className="text-center">  
+                        <h4>No Item</h4>
+                    </td>
+                </tr>
+            )
+        }
        let classNameLabel = '';
        let nameLabel = '';
        switch(item.level){

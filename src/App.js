@@ -7,7 +7,8 @@ import ListItem from './components/ListItem';
 import Items from './mockdata/Items';
 import Item from './components/Item';
 import swal from 'sweetalert';
-import sweetalert from 'sweetalert';
+import SweetAlert from 'react-bootstrap-sweetalert';
+
 
 
 
@@ -28,16 +29,17 @@ class App extends  React.Component {
     let classNameLabel = '';
         return (
             <div className="container">
-                 <swal
-               show={this.state.showAlert}
-               title="Delete Item"
-               text={this.state.titleAlert}
-               showCancelButton
-               onOutsideClick={()  => this.setState({ showAlert: false })}
-               onEscapeKey={()     => this.setState({ showAlert: false })}
-               onCancel={()        => this.setState({ showAlert: false })}
-               onConfirm={()       => this.handleDeleteItem()}
-                     />
+          <button onClick={()=>this.setState({ showAlert: true })}>Alert</button>
+            <SweetAlert
+                 show={this.state.showAlert}
+                 title="Delete Item"
+                 text={this.state.titleAlert}
+                 showCancelButton
+                 onOutsideClick={()  => this.setState({ showAlert: false })}
+                 onEscapeKey={()     => this.setState({ showAlert: false })}
+                 onCancel={()        => this.setState({ showAlert: false })}
+                 onConfirm={() => this.handleDeleteItem()}
+            />
                 <Title />
               
                 <div className="row">
@@ -81,8 +83,8 @@ class App extends  React.Component {
         this.state = {
             items: Items,
             showAlert: false,
-            titleAlert:'',
-            idAlert:''
+            titleAlert: '',
+            idAlert: ''
         }
     }
     renderItem = () => {
@@ -102,9 +104,9 @@ class App extends  React.Component {
     }
     handleShowAlert = (item) => {
       this.setState({
-          showAlert:true,
-          titleAlert: item.name,
-          idAlert: item.id
+        showAlert: true,
+        titleAlert: item.name,
+        idAlert: item.id
       });
     }
     handleDeleteItem = () => {
