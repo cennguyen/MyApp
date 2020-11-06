@@ -3,10 +3,8 @@ import Title from './components/Title';
 import Search from './components/Search';
 import Sort from './components/Sort';
 import Form from './components/Form';
-import ListItem from './components/ListItem';
 import Items from './mockdata/Items';
 import Item from './components/Item';
-import swal from 'sweetalert';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import ItemEdit from './components/ItemEdit';
 
