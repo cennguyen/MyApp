@@ -8,6 +8,7 @@ import Items from './mockdata/Items';
 import Item from './components/Item';
 import swal from 'sweetalert';
 import SweetAlert from 'react-bootstrap-sweetalert';
+import ItemEdit from './components/ItemEdit';
 
 
 
@@ -83,20 +84,32 @@ class App extends  React.Component {
             items: Items,
             showAlert: false,
             titleAlert: '',
-            idAlert: ''
+            idAlert: '',
+            indexEdit: 0,
+            idEdit: '',
+            nameEdit: '',
+            levelEdit: 0
         }
     }
     renderItem = () => {
         let {items} = this.state;
+        const{item,idEdit}=this.state;
         if(items.length === 0) {
             return <Item item={0} />
         }
         return items.map((item, index) => {
+            if(item.id === idEdit){
+                return(
+                    <ItemEdit/>
+                )
+            }
             return (
                 <Item
                     item={item}
                     index={index}
+                    key={index}
                     handleShowAlert={this.handleShowAlert}
+                    handleEditItem={this.handleEditItem}
                   />
             )
         });
@@ -121,6 +134,14 @@ class App extends  React.Component {
                 });
             }
         }
+    }
+    handleEditItem = (index,item) => {
+        this.setState({
+            indexEdit:index,
+            idEdit: item.id,
+            nameEdit:item.name,
+            levelEdit:item.level
+        });
     }
     
 }

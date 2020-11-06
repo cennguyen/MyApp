@@ -41,7 +41,12 @@ class Item extends Component{
        <span className={classNameLabel}>{nameLabel}</span>
                </td>
                <td>
-                   <button type="button" className="btn btn-warning btn-sm">Edit</button>
+               <button 
+                     type="button" className="btn btn-sm btn-warning marginR5"
+                     onClick={() => this.props.handleEditItem(index, item)}
+                            >
+                             Edit
+                            </button>
                    <button type="button" className="btn btn-danger btn-sm"
                     onClick={()=>this.props.handleShowAlert(item)}>   Delete  </button>
 
