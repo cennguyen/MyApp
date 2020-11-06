@@ -78,6 +78,15 @@ class App extends  React.Component {
     }
     constructor(props) {    
         super(props);
+        let arrayLevel = [];
+        if(Items.length > 0) {
+            for(let i = 0; i < Items.length; i++) {
+                if(arrayLevel.indexOf(Items[i].level) === -1) {
+                    arrayLevel.push(Items[i].level);
+                }
+            }
+        }
+        arrayLevel.sort(function(a, b){return a - b});
         this.state = {
             items: Items,
             showAlert: false,
@@ -86,19 +95,30 @@ class App extends  React.Component {
             indexEdit: 0,
             idEdit: '',
             nameEdit: '',
-            levelEdit: 0
+            levelEdit: 0,
+            arrayLevel: arrayLevel
         }
     }
     renderItem = () => {
         let {items} = this.state;
-        const{item,idEdit}=this.state;
+        const{item,idEdit,indexEdit,nameEdit,levelEdit,arrayLevel}=this.state;
         if(items.length === 0) {
             return <Item item={0} />
         }
         return items.map((item, index) => {
             if(item.id === idEdit){
                 return(
-                    <ItemEdit/>
+                    <ItemEdit
+                    key={index}
+                    indexEdit={indexEdit}
+                    nameEdit={nameEdit}
+                    levelEdit={levelEdit}
+                    arrayLevel={arrayLevel}
+                    handleEditClickCancel={this.handleEditClickCancel}
+                    handleEditInputChange={this.handleEditInputChange}
+                    handleEditSelectChange={this.handleEditSelectChange}
+                    handleEditClickSubmit={this.handleEditClickSubmit}
+                    />
                 )
             }
             return (
@@ -140,6 +160,37 @@ class App extends  React.Component {
             nameEdit:item.name,
             levelEdit:item.level
         });
+    }
+    handleEditClickCancel =()=>{
+        this.setState({
+            idEdit:''
+        });
+    }
+    handleEditInputChange =(value)=>{
+        this.setState({
+            nameEdit:value
+        });
+    }
+    handleEditSelectChange= (value)=>{
+        this.setState({
+            levelEdit:value
+        });
+    }
+    handleEditClickSubmit=()=>{
+        let{items,idEdit,nameEdit,levelEdit}=this.state;
+        if(items.length>0){
+            for(let i=0;i<items.length;i++){
+                if(items[i].id===idEdit){
+                    items[i].name=nameEdit;
+                    items[i].level= +levelEdit;
+                    break;
+                    
+                }
+                this.setState({
+                    idEdit:''
+                });
+            }
+        }
     }
     
 }
