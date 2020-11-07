@@ -8,6 +8,7 @@ import Item from './components/Item';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import ItemEdit from './components/ItemEdit';
 import { v4 as uuidv4 } from 'uuid';
+import { orderBy as orderByld } from 'lodash';
 
 
 
@@ -46,7 +47,11 @@ class App extends React.Component {
                         <Search />
                     </div>
                     <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <Sort />
+                        <Sort
+                            sortType={this.state.sortType}
+                            sortOrder={this.state.sortOrder}
+                            handleSort={this.handleSort}
+                        />
                     </div>
                     <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                         <button type="button" className="btn btn-info btn-block marginB10"
@@ -111,7 +116,9 @@ class App extends React.Component {
             arrayLevel: arrayLevel,
             showForm: false,
             valueItem: '',
-            levelItem: 0
+            levelItem: 0,
+            sortType: '',
+            sortOrder: ''
         }
     }
     renderItem = () => {
@@ -249,10 +256,20 @@ class App extends React.Component {
         };
         Items.push(newItem);
         this.setState({
-            items:Items,
-            valueItem:'',
-            levelItem:0,
-            showForm:false
+            items: Items,
+            valueItem: '',
+            levelItem: 0,
+            showForm: false
+        });
+    }
+    handleSort = (sortType,sortOrder) => {
+        this.setState({
+            sortType: sortType,
+            sortOrder: sortOrder
+        });
+        let {items} = this.state;
+        this.setState({
+            items: orderByld(items, [sortType],[sortOrder])
         });
     }
 }
